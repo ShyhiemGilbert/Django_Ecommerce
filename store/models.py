@@ -31,7 +31,7 @@ class Customer(models.Model):
 class Address(models.Model):
     street = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
-    customer = models.OneToOneField(Customer, on_delete=models.CASCADE, primary_key=True) # if we delete a customer the address should be deleted too
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE) # if we delete a customer the address should be deleted too
     
     
     
