@@ -1,5 +1,4 @@
 from django.db import models
-from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
 class Product(models.Models):
@@ -29,6 +28,13 @@ class Customer(models.Model):
                                   default= MEMBERSHIP_BRONZE 
                                 )
     
+class Address(models.Model):
+    street = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    customer = models.OneToOneField(Customer, on_delete=models.CASCADE) # if we delete a customer the address should be deleted too
+    
+    
+    
 class Order(models.Model):
     PAYMENT_STATUS_PENDING = 'P'
     PAYMENT_STATUS_COMPLETE = 'C'
@@ -44,5 +50,7 @@ class Order(models.Model):
                                       choices = PAYMENT_STATUS_CHOICES,
                                       default = PAYMENT_STATUS_PENDING 
                                     )
+    
+
     
     
